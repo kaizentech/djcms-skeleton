@@ -10,29 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import environ
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = environ.Path(__file__) - 3
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'hmd8n2gq@&$g*8t7gp3rzjyw31+q++=iyk*-h&0p7p*m!3w)3n'
+# set default values and casting
+ENV_VAR = environ.Env(DEBUG=(bool, False),)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# False if not in os.environ
+DEBUG = ENV_VAR('DEBUG')
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = ENV_VAR('SECRET_KEY')
 
 SITE_ID = 1
 
 # Application definition
-
 INSTALLED_APPS = (
-    'jet.dashboard',
-    'jet',
+    'grappelli',
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.sites',
@@ -57,13 +53,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            BASE_DIR('templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,16 +74,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -108,5 +94,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR('static'),
 ]
+
+# Change to whatever you like
+GRAPPELLI_ADMIN_TITLE = "{{ project_name }}'s Admin Panel"
