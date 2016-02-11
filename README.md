@@ -51,3 +51,6 @@ You can also save these in your vurtualenv's script for auto invocation during v
 2. Settings based on [django-environ](https://django-environ.readthedocs.org/en/latest/)
 3. Excellent admin interface by [django-grappelli] (https://django-grappelli.readthedocs.org/en/latest/index.html)
 4. Great Blogging app [django-blog-zinnia](https://github.com/Fantomas42/django-blog-zinnia)
+
+### Help ###
+1. Use this to generate [SECRET_KEY](http://www.miniwebtool.com/django-secret-key-generator/) 
