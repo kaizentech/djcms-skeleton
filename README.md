@@ -9,7 +9,13 @@ A simple Django starter template
   
 3. Install requirements by running this command from your project dir
   
+  On Prod:
+
   `pip install -r requirements.txt`
+
+  On Dev:
+
+  `pip install -r requirements/dev.txt`
 
 4. Setup these environment variables on your system (or in virtualenv)
 
