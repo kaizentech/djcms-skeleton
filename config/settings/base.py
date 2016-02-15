@@ -99,3 +99,15 @@ STATICFILES_DIRS = [
 
 # Change to whatever you like
 GRAPPELLI_ADMIN_TITLE = "{{ project_name }}'s Admin Panel"
+
+EMAIL_HOST = ENV_VAR('EMAIL_HOST')
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = ENV_VAR('EMAIL_HOST_USER')
+
+EMAIL_HOST_PASSWORD = ENV_VAR('EMAIL_HOST_PASSWORD')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
