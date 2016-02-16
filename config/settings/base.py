@@ -14,14 +14,14 @@ import environ
 
 BASE_DIR = environ.Path(__file__) - 3
 
-# set default values and casting
-ENV_VAR = environ.Env(DEBUG=(bool, False),)
+ENV_VAR = environ.Env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # False if not in os.environ
-DEBUG = ENV_VAR('DEBUG')
+DEBUG = ENV_VAR('DEBUG', default=False)
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# If not found in os.environ will raise ImproperlyConfigured error
 SECRET_KEY = ENV_VAR('SECRET_KEY')
 
 SITE_ID = 1
@@ -100,14 +100,17 @@ STATICFILES_DIRS = [
 # Change to whatever you like
 GRAPPELLI_ADMIN_TITLE = "{{ project_name }}'s Admin Panel"
 
-EMAIL_HOST = ENV_VAR('EMAIL_HOST')
+# '' if not in os.environ
+EMAIL_HOST = ENV_VAR('EMAIL_HOST', default='')
 
 EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = ENV_VAR('EMAIL_HOST_USER')
+# '' if not in os.environ
+EMAIL_HOST_USER = ENV_VAR('EMAIL_HOST_USER', default='')
 
-EMAIL_HOST_PASSWORD = ENV_VAR('EMAIL_HOST_PASSWORD')
+# '' if not in os.environ
+EMAIL_HOST_PASSWORD = ENV_VAR('EMAIL_HOST_PASSWORD', default='')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
