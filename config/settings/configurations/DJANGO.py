@@ -12,24 +12,50 @@ SITE_ID = 1
 
 # Application definition
 INSTALLED_APPS = [
-    'grappelli',
-    'django.contrib.admin',
+    'djangocms_admin_style',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.admin',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
+    'cms',
+    'menus',
+    'sekizai',
+    'treebeard',
+    'djangocms_text_ckeditor',
+    'djangocms_style',
+    'djangocms_column',
+    'filer',
+    'easy_thumbnails',
+    'cmsplugin_filer_image',
+    'cmsplugin_filer_file',
+    'cmsplugin_filer_folder',
+    'cmsplugin_filer_teaser',
+    'cmsplugin_filer_utils',
+    'cmsplugin_filer_video',
+    'djangocms_googlemap',
+    'djangocms_inherit',
+    'djangocms_link',
+    # 'reversion',
 ]
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware'
 ]
 
 ROOT_URLCONF = 'urls'
@@ -40,13 +66,24 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR('templates'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.request',
+                'django.core.context_processors.media',
+                'django.core.context_processors.csrf',
+                'django.core.context_processors.tz',
+                'sekizai.context_processors.sekizai',
+                'django.core.context_processors.static',
+                'cms.context_processors.cms_settings'
+            ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                'django.template.loaders.eggs.Loader'
             ],
         },
     },
